@@ -27,10 +27,10 @@
           :OrderNum = "item.waybillNo>0?item.waybillNo:item.orderNo"
           :Time = "item.orderTime"
           :RentalTag ="item.rentTag=='true'?1:0"
-          :TotalAmount = "item.rentTag=='true'?(88+rentAmount):88"
+          :TotalAmount = "item.cost"
           :Name = "item.consigneeName"
           :Phone ="item.consigneePhone"
-          :AddressValue ="item.storeFullAddress"
+          :AddressValue ="item.homePickupTag=='true' ? (item.receiptCity+item.receiptDistrict+item.receiptAddress):item.storeFullAddress"
       />
   </div>
   <div style=""></div>
@@ -56,10 +56,10 @@ export default {
   data()
   {
     return{
-      value1: 0,
+      value1: 1,
       option1: [
-        { text: '從最新到最舊', value: 0 },
-        { text: '從最舊到最新', value: 1 },
+        { text: '從最新到最舊', value: 1 },
+        { text: '從最舊到最新', value: 0 },
         // { text: '昨天的記錄', value: 2 },
       ],
       list:undefined,
@@ -114,9 +114,9 @@ export default {
   methods:{
     Filter(){
       console.log(this.value1);
-      if(this.value1 == 0){
+      if(this.value1 == 1){
        this.master_list = this.reverseList;
-      }else if(this.value1 == 1){
+      }else if(this.value1 == 0){
         this.master_list = this.list;
       }else{
         console.log("")

@@ -41,5 +41,7 @@ app.use(Tabs);
 
 axios.defaults.baseURL="http://121.199.54.43:8888";
 // axios.defaults.baseURL = 'http://192.168.100.103:8083';
+// axios.defaults.baseURL = 'http://192.168.100.104:8777';
+
 
 app.mount('#app');

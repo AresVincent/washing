@@ -1,6 +1,6 @@
 <script>
     // global variable
-    const rentAmount=35;
+    const rentAmount=40;
     export default {
         'name':'Common',
         rentAmount

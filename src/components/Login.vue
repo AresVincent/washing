@@ -146,10 +146,10 @@ a {
     transform: translateX(-50%);
     overflow: auto;
 }
-  .imgBox img{
-    width: 100%;
-    height:auto;
-  }
+.imgBox img{
+  width: 100%;
+  height:auto;
+}
 @media only screen and (min-width: 992px){
    .van-overlay .imgBox{
     width: 70%;

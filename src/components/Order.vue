@@ -3,7 +3,7 @@
     <van-notice-bar
       color="#F71919"
       left-icon="volume-o"
-      text="Ares 提提你：我們現在進行新客優惠！指定洗衣袋可以免費送俾大家！數量有限記得問問店員仲有冇存貨啦"
+      text="Ares 提提你：我們依家有得將洗完既衫送到你屋企門口啦！唔想自己拎黎拎去？洗衣上門幫到你！"
     />
     <van-form @submit="onSubmit">
       <!--Buy/Rental Washing Bag-->
@@ -12,24 +12,49 @@
           <van-switch v-model="switchChecked" @change="RentalTagChanged" size="24" inactive-color="#dcdee0" />
         </template>
       </van-cell>
-      <!-- free washing bag -->
-      <!-- <van-cell center title="免費領取洗衣袋?" size="large">
+      <!-- choose delivery home when finish washing -->
+      <van-cell center title="洗衣上門" size="large">
         <template #right-icon>
-          <van-switch v-model="switchFreeChecked" @change="FreeTagChanged" size="24" inactive-color="#dcdee0" />
+          <van-switch v-model="deliveryChecked" @change="DeliveryTagChanged" size="24" inactive-color="#dcdee0" />
         </template>
-      </van-cell> -->
+      </van-cell>
       <!--Address-->
       <van-field
           v-model="fieldValue"
           is-link
           required
           readonly
-          label="地址"
-          placeholder="請選擇所在地址"
+          label="自提點"
+          placeholder="請選擇自提點"
           @click="show = true"
           size="large"
-          :rules="[{ required: true, message: '請選擇收貨地址' }]"
+          :rules="[{ required: true, message: '請選擇自提點' }]"
       />
+      <div  v-if="deliveryChecked==true">
+        <van-field 
+          v-model="districtValue"
+            is-link
+            required
+            readonly
+            label="地區"
+            placeholder="請選擇所在地區"
+            @click="showDistrict = true"
+            size="large"
+            :rules="[{ required: true, message: '請選擇地區' }]"
+        />
+        <van-field 
+        v-model="addressDetail"
+        label="詳細地址" 
+        placeholder="請填寫街道和所在大廈及樓層單位"
+        required
+        :rules="[{ required: true, message: '請輸入您的詳細地址' }]"
+        />
+      </div>
+      <!-- district popup -->
+      <van-popup v-model:show="showDistrict" round position="bottom">
+        <van-area :area-list="districtOpt" @confirm="onDistrictFinish" @cancel="showDistrict=false"  :columns-placeholder="['请选择', '请选择', '请选择']"/>
+      </van-popup>
+      <!-- picup point -->
       <van-popup v-model:show="show" round position="bottom">
         <van-cascader
             v-model="cascaderValue"
@@ -39,6 +64,7 @@
             @finish="onFinish"
         />
       </van-popup>
+      
       <div id="flux" class="form-group" @scroll="onScroll">
           <h3 style="margin-bottom:0px;">Ares服務條款及細則</h3>
           <p class="content" style="font-size:16px;line-height: 3rem;margin-top:0;">
@@ -74,10 +100,10 @@
         </template>
       </van-field>
       <div class="amount">
-        <h2 id="total" style="padding-right:20px;">總金額: $88</h2>
+        <h2 id="total" style="padding-right:20px;">總金額: $68</h2>
       </div>
       <van-cell-group class="priceLabel" hidden><van-field label="總金額：" size="large" v-model="price" readonly /></van-cell-group>
-      <van-cell class="alertCell" title="注意：洗衣袋限時限量五百個，送完即止！" size="large" />
+      <van-cell class="alertCell" title="注意：洗衣上門為洗完後派送上門的服務，而非上門收件的服務！" size="large" />
       <div style="margin: 16px;">
         <van-button round block type="primary" native-type="submit">
           提交
@@ -108,17 +134,23 @@ export default {
   data(){
     return{
       switchChecked: false,
+      deliveryChecked:false,
       switchFreeChecked:false,
       checked:false,
       checkboxdisable:true,
       show: false,
+      showDistrict:false,
       LoginStatus: VueCookies.get("LoginStatus"),
       username: VueCookies.get("Name"),
       phone: VueCookies.get("Phone"),
       fieldValue: "",
+      districtValue:"",
       AddressValue: "",
+      receiptCity:"",
+      receiptDistrict:"",
+      addressDetail:'',
       cascaderValue: "",
-      price:"$88",
+      price:68,
       isLastSubmitFinished:true,
       // 选项列表，children 代表子选项，支持多级嵌套
       options: [
@@ -229,7 +261,7 @@ export default {
                 { text: "天水圍天秀路8號天一商場3樓3005號鋪", value: "HKG-P246" },
                 { text: "元朗鳳群街2號年發大廈地下11號鋪", value: "HKG-P036" },
                 { text: "元朗媽橫路15-19號良材大樓2期地下5號舖（郎屏地鐵站B2出口）", value: "HKG-P025" },
-                { text: "元朗裕榮徑11號好旺洋樓地下17號鋪（教育路沿大坑渠經舊B仔凉粉直入天橋位）", value: "HKG-P264" },
+                // { text: "元朗裕榮徑11號好旺洋樓地下17號鋪（教育路沿大坑渠經舊B仔凉粉直入天橋位）", value: "HKG-P264" },
               ]
             },
             {
@@ -286,33 +318,65 @@ export default {
           ],
         },
       ],
+      districtOpt:{
+        province_list: {
+          810000: '香港特別行政區',
+        },
+        city_list: {
+          810100: '港島',
+          810200: '九龍',
+          810300: '新界'
+        },
+        county_list: {
+          810101: '中西區',
+          810102: '灣仔區',
+          810103: '東區',
+          810104: '南區',
+          810201: '九龍城區',
+          810202: '油尖旺區',
+          810203: '深水埗區',
+          810204: '黃大仙區',
+          810205: '觀塘區',
+          810301: '北區',
+          810302: '大埔區',
+          810303: '沙田區',
+          810304: '西貢區',
+          810305: '元朗區',
+          810306: '屯門區',
+          810307: '荃灣區',
+          810308: '葵青區',
+          810309: '離島區',
+        }
+      },
     }
   },
   methods:{
     RentalTagChanged(){
       let amounttext = document.getElementById("total");
+      this.price=68;
       if(this.switchChecked==true){
         console.log(this.switchChecked);
-        amounttext.innerHTML="總金額:$"+(88+this.RentAmount);
-        this.price=(88+this.RentAmount);
-        console.log(this.price);
-      }else{
-        console.log(this.switchChecked);
-        amounttext.innerHTML="總金額: $88";
-        this.price=88;
+        // amounttext.innerHTML="總金額:$"+(68+this.RentAmount);
+        this.price+=this.RentAmount;
         console.log(this.price);
       }
+      //if choose home delivery
+      this.price+=30*this.deliveryChecked;
+      amounttext.innerHTML="總金額: $"+this.price;
     },
-    // FreeTagChanged(){
-    //     let amounttext = document.getElementById("total");
-    //   if(this.switchFreeChecked==true){
-    //     console.log(this.switchFreeChecked);
-    //     amounttext.innerHTML="總金額:$"+(88+this.RentAmount);
-    //   }else{
-    //     console.log(this.switchFreeChecked);
-    //     amounttext.innerHTML="總金額: $88";
-    //   }
-    // },
+    DeliveryTagChanged(){
+      let amounttext = document.getElementById("total");
+      this.price=68;
+      if(this.deliveryChecked==true){
+        console.log(this.deliveryChecked);
+        // amounttext.innerHTML="總金額:$"+(68+this.RentAmount);
+        this.price+=30;
+        console.log(this.price);
+      }
+      //if choose bag
+      this.price+=this.RentAmount*this.switchChecked;
+      amounttext.innerHTML="總金額: $"+this.price;
+    },
     onScroll ({ target: { scrollTop, clientHeight, scrollHeight }}) {
       if (scrollTop + clientHeight >= scrollHeight) {
         console.log("We are at bottom");
@@ -342,13 +406,17 @@ export default {
         orderNo:OrderNum,
         consignorName:this.username,
         consignorPhone:this.phone,
-        cost:88,
+        cost:this.price,
         consigneeName:this.username,
         consigneePhone:this.phone,
         packageNumber:"1",
         pickUpPoint:this.AddressValue,
         rentTag:this.switchChecked,
-        packageRentCost:this.switchChecked*this.RentAmount
+        packageRentCost:this.switchChecked*this.RentAmount,
+        receiptCity:this.receiptCity,
+        receiptDistrict:this.receiptDistrict,
+        receiptAddress:this.addressDetail,
+        homePickupTag:this.deliveryChecked,
       }
       const aresheaders = {
         "Content-Type" : "application/json; charset=utf-8",
@@ -361,7 +429,6 @@ export default {
       }
       this.isLastSubmitFinished=false;
       axios.post("/package/createOrder", ares_data, {aresheaders})
-
           .then(function(AresResponse){
             console.log(AresResponse);
             if(AresResponse.data.code == 200){
@@ -381,6 +448,19 @@ export default {
       console.log("Total Price: ",this.switchChecked*50 + 88);
       console.log("AddressCode: ",this.AddressValue);
     },
+    onDistrictFinish(target){
+      this.showDistrict=false;
+      console.log(target);
+      let strText="";
+      for(let i=1;i<target.length;i++){
+        strText+=target[i].name;
+      }
+      this.districtValue=strText;
+      this.receiptCity=target[1].name;
+      this.receiptDistrict=target[2].name;
+      console.log(this.receiptCity);
+      console.log(this.receiptDistrict);
+    }
   }
 };
 </script>
