@@ -376,6 +376,11 @@ export default {
       //if choose bag
       this.price+=this.RentAmount*this.switchChecked;
       amounttext.innerHTML="總金額: $"+this.price;
+      //if delivery tag change,clear district and address
+      this.districtValue="";
+      this.receiptCity="";
+      this.receiptDistrict="";
+      this.addressDetail="";
     },
     onScroll ({ target: { scrollTop, clientHeight, scrollHeight }}) {
       if (scrollTop + clientHeight >= scrollHeight) {
