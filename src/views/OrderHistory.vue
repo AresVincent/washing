@@ -30,6 +30,8 @@
           :TotalAmount = "item.cost"
           :Name = "item.consigneeName"
           :Phone ="item.consigneePhone"
+          :homePickup="item.homePickupTag"
+          :storeAddress="item.storeFullAddress"
           :AddressValue ="item.homePickupTag=='true' ? (item.receiptCity+item.receiptDistrict+item.receiptAddress):item.storeFullAddress"
       />
   </div>
