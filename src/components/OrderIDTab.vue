@@ -14,7 +14,7 @@
         </p>
         <p>
           <span>洗衣袋數量：1</span>&nbsp;&nbsp;&nbsp;&nbsp;
-          <span>租用洗衣袋數量：{{ RentalTag>0? 1:0}}</span>
+          <span>購買洗衣袋數量：{{ RentalTag>0? 1:0}}</span>
         </p>
         <p>
           <span>總金額：HKD ${{ TotalAmount }}</span>

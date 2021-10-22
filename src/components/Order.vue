@@ -7,7 +7,7 @@
     />
     <van-form @submit="onSubmit">
       <!--Buy/Rental Washing Bag-->
-      <van-cell center title="租用洗衣袋?" size="large">
+      <van-cell center title="購買洗衣袋?" size="large">
         <template #right-icon>
           <van-switch v-model="switchChecked" @change="RentalTagChanged" size="24" inactive-color="#dcdee0" />
         </template>
@@ -36,7 +36,7 @@
             is-link
             required
             readonly
-            label="地區"
+            label="派送地區"
             placeholder="請選擇所在地區"
             @click="showDistrict = true"
             size="large"
@@ -44,21 +44,24 @@
         />
         <van-field 
         v-model="addressDetail"
-        label="詳細地址" 
+        label="派送地址" 
         placeholder="請填寫街道和所在大廈及樓層單位"
         required
+        size="large"
         :rules="[{ required: true, message: '請輸入您的詳細地址' }]"
         />
       </div>
       <!-- district popup -->
       <van-popup v-model:show="showDistrict" round position="bottom">
-        <van-area :area-list="districtOpt" @confirm="onDistrictFinish" @cancel="showDistrict=false"  :columns-placeholder="['请选择', '请选择', '请选择']"/>
+        <van-area :area-list="districtOpt" @confirm="onDistrictFinish" @cancel="showDistrict=false"
+          confirm-button-text	="確認"  :columns-placeholder="['請選擇', '請選擇', '請選擇']"/>
       </van-popup>
       <!-- picup point -->
       <van-popup v-model:show="show" round position="bottom">
         <van-cascader
             v-model="cascaderValue"
             title="請選擇所在地區"
+            placeholder="請選擇"
             :options="options"
             @close="show = false"
             @finish="onFinish"
@@ -100,7 +103,7 @@
         </template>
       </van-field>
       <div class="amount">
-        <h2 id="total" style="padding-right:20px;">總金額: $68</h2>
+        <h2 id="total" style="padding-right:20px;">總金額: $88</h2>
       </div>
       <van-cell-group class="priceLabel" hidden><van-field label="總金額：" size="large" v-model="price" readonly /></van-cell-group>
       <van-cell class="alertCell" title="注意：洗衣上門為洗完後派送上門的服務，而非上門收件的服務！" size="large" />
@@ -150,7 +153,7 @@ export default {
       receiptDistrict:"",
       addressDetail:'',
       cascaderValue: "",
-      price:68,
+      price:88,
       isLastSubmitFinished:true,
       // 选项列表，children 代表子选项，支持多级嵌套
       options: [
@@ -353,7 +356,7 @@ export default {
   methods:{
     RentalTagChanged(){
       let amounttext = document.getElementById("total");
-      this.price=68;
+      this.price=88;
       if(this.switchChecked==true){
         console.log(this.switchChecked);
         // amounttext.innerHTML="總金額:$"+(68+this.RentAmount);
@@ -366,7 +369,7 @@ export default {
     },
     DeliveryTagChanged(){
       let amounttext = document.getElementById("total");
-      this.price=68;
+      this.price=88;
       if(this.deliveryChecked==true){
         console.log(this.deliveryChecked);
         // amounttext.innerHTML="總金額:$"+(68+this.RentAmount);
@@ -450,7 +453,7 @@ export default {
           });
       console.log("Name: ",this.username);
       console.log("Phone: ",this.phone);
-      console.log("Total Price: ",this.switchChecked*50 + 88);
+      console.log("Total Price: ",this.switchChecked*40 + 88);
       console.log("AddressCode: ",this.AddressValue);
     },
     onDistrictFinish(target){
