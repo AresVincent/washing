@@ -1,7 +1,7 @@
 <template>
   <NavHead :isShowHead="2"/>
   <div class="container">
-    <Order :RentAmount='rentAmount'/>
+    <Order/>
   </div>
   <NavBottom :propsActive="2"/>
 </template>
@@ -10,7 +10,6 @@
 import Order from "../components/Order";
 import NavBottom from "../components/NavBottom";
 import NavHead from "../components/NavHead";
-import Global from '../components/Common';
 
 export default {
   name: 'Home',
@@ -21,15 +20,10 @@ export default {
   },
   data(){
     return{
-        rentAmount:Global.rentAmount
     }
   }
 }
 </script>
 
 <style>
-.logo{
-  margin-top:20px;
-  margin-bottom:20px;
-}
 </style>

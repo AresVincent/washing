@@ -29,9 +29,6 @@ export default {
 
 <style>
 .container{
-  /* background-image: url("http://223.197.188.172:8082/img/washing.png"); */
   padding: 0px 0px 50px 0px;
-  /* height:1000px; */
-  /* background-repeat: repeat; */
 }
 </style>

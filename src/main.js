@@ -8,6 +8,8 @@ import {Popup} from 'vant'
 import {Overlay} from 'vant'
 import router from './router'
 import axios from 'axios'
+import baseUrl from './router/baseUrl'
+import  "./assets/css/main.css"
 
 const app = createApp(App).use(router);
 
@@ -40,7 +42,8 @@ app.use(Tab);
 app.use(Icon);
 app.use(Tabs);
 
-axios.defaults.baseURL="http://121.199.54.43:8888";
+axios.defaults.baseURL=baseUrl;
+app.config.globalProperties.rentAmount=40
 // axios.defaults.baseURL = 'http://192.168.100.103:8083';
 // axios.defaults.baseURL = 'http://192.168.100.104:8777';
 

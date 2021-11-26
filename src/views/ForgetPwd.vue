@@ -24,11 +24,8 @@ export default {
 <style>
 .logo{
   margin-top:80px!important;
-  margin-bottom:20px;
 }
-html{
-  background-image: url("http://223.197.188.172:8082/img/washing.png");
-}
+
 .home{
   text-align: center;
   padding: 0px 15px 0px 15px;

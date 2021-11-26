@@ -143,25 +143,13 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h3 {
-  margin: 40px 0 0;
+.forgetPwd{
+  padding: 15px;
 }
 .submit{
   /*margin-left: 27px;*/
   width:100%;
 }
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: blue;
-}
-
 #verifyBtn.disable{
   pointer-events: none;
   background: grey;

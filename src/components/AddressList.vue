@@ -18,7 +18,7 @@
          </tbody> -->
      <!-- </table> -->
 
-    <van-tabs v-model="active">
+    <van-tabs v-model="active" >
         <van-tab class="tab_content" title="九龍" name="kowloon" v-model="isFirstLoad">
             <div class="addressBox" v-for="item in kwAddress" :key="item.address">
                 <p>名稱/類別：{{item.name}}</p>

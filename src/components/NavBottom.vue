@@ -2,7 +2,7 @@
   <div class="nav-bottom">
       <van-tabbar v-model="active">
   <!--      <van-tabbar-item icon="home-o">主頁</van-tabbar-item>-->
-        <van-tabbar-item to="/">
+        <!-- <van-tabbar-item to="/">
           <span>主頁</span>
           <template #icon="props">
             <img class="navbar_icon" :src="props.active ? icon.home_active : icon.home_inactive" />
@@ -14,19 +14,33 @@
             <img class="navbar_icon" :src="props.active ? icon.setting_active : icon.setting_inactive" />
           </template>
         </van-tabbar-item>
-        <van-tabbar-item to="order">
+        <van-tabbar-item to="/order">
           <span>下單</span>
           <template #icon="props">
             <img class="navbar_icon" :src="props.active ? icon.order_active : icon.order_inactive" />
           </template>
         </van-tabbar-item>
-        <van-tabbar-item to="history">
+        <van-tabbar-item to="/history">
           <span>訂單記錄</span>
           <template #icon="props">
             <img class="navbar_icon" :src="props.active ? icon.history_active : icon.history_inactive" />
           </template>
-        </van-tabbar-item>
-        <van-tabbar-item to="/addressList" icon="location-o">地址列表</van-tabbar-item>
+        </van-tabbar-item> -->
+         <!-- <van-tabbar-item to="/history">
+          <span>地址列表</span>
+          <template #icon="props">
+            <img class="navbar_icon" :src="props.active ? icon.history_active : icon.history_inactive" />
+          </template>
+        </van-tabbar-item> -->
+        <!-- <van-tabbar-item to="/" icon="wap-home">主頁</van-tabbar-item>
+        <van-tabbar-item to="/register" icon="friends">註冊</van-tabbar-item>
+        <van-tabbar-item to="/order" icon="location">下單</van-tabbar-item>
+        <van-tabbar-item to="/history" icon="location">訂單記錄</van-tabbar-item> -->
+        <van-tabbar-item to="/" icon="wap-home">主頁</van-tabbar-item>
+        <van-tabbar-item to="/register" icon="friends">註冊</van-tabbar-item>
+        <van-tabbar-item to="/order" icon="bag">下單</van-tabbar-item>
+        <van-tabbar-item to="/history" icon="label">訂單記錄</van-tabbar-item>
+        <van-tabbar-item to="/addressList" icon="location">地址列表</van-tabbar-item>
 <!--        <van-tabbar-item to="/setting" icon="setting-o">我的</van-tabbar-item>-->
 
   <!--      <van-tabbar-item icon="setting-o">設定</van-tabbar-item>-->
@@ -70,17 +84,6 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h3 {
-  margin: 40px 0 0;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
 a {
   color: #42b983;
 }

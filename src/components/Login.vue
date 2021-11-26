@@ -119,23 +119,9 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h3 {
-  margin: 40px 0 0;
-}
 .submit{
   /*margin-left: 27px;*/
   width:100%;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: blue;
 }
 .van-overlay .imgBox{
     position: absolute;
@@ -182,5 +168,7 @@ a {
   margin-top: 20px;
   z-index: 999;
 }
-    
+a{
+  color: #E49C2E;
+}
 </style>

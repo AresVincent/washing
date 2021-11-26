@@ -3,7 +3,7 @@
     <van-notice-bar
       color="#F71919"
       left-icon="volume-o"
-      text="Ares 提提你：我們依家有得將洗完既衫送到你屋企門口啦！唔想自己拎黎拎去？洗衣上門幫到你！"
+      text="King's 提提你：我們依家有得將洗完既衫送到你屋企門口啦！唔想自己拎黎拎去？洗衣上門幫到你！"
     />
     <van-form @submit="onSubmit">
       <!--Buy/Rental Washing Bag-->
@@ -69,7 +69,7 @@
       </van-popup>
       
       <div id="flux" class="form-group" @scroll="onScroll">
-          <h3 style="margin-bottom:0px;">Ares服務條款及細則</h3>
+          <h3 style="margin-bottom:0px;">King's服務條款及細則</h3>
           <p class="content" style="font-size:16px;line-height: 3rem;margin-top:0;">
             1. 磅洗服務，包括衣物清洗、焗乾及摺疊。 <br>
             2. 每次惠顧客人需填寫正確的電話及姓名，如信息不正確導致後續收不到提件碼、包裹被冒領等問題，本公司恕不負責。<br>
@@ -80,12 +80,12 @@
             7. 包裹如退回4PX分拔倉後，客人需要再次送到自提點取件，需支付HKD20的行政費，到達自提點後由客人現金支付。<br>
             8. 洗衣機轉動清洗衣物時，總有一定的機械動作；清洗後衣物需經高溫焗乾，如有染色、脫色、破損、縮水，本公司恕未能負責。<br>
             9. 取衣時確保洗衣袋和索帶的完整性，衣物領回後，如有遺失，本公司恕未能負責。<br>
-            10.取衣時，如洗衣袋有破損，需當面提出，並聯絡Ares以後續處理。如因洗衣袋破損導致的內部物失破損、遺失，最高賠償額為HKD200/袋。<br>
+            10.取衣時，如洗衣袋有破損，需當面提出，並聯絡King's以後續處理。如因洗衣袋破損導致的內部物失破損、遺失，最高賠償額為HKD200/袋。<br>
             11. 如自提點或中轉過程中遺失包裹，最高賠償額為HKD200/袋。<br>
             12. 磅洗衣物，遇上不可抗力的情況，或任何意外之損失，本公司恕未能負責。<br>
             13. 客人請確保交付之衣物內沒有任何貴重物品，如有任何遺失，本公司恕未能負責。<br>
             14. 如因假期或運輸問題有所延誤，則不作另行通知。<br>
-            15.Ares 保留隨時更改使用條款及細則之權利，而不會作另行通知。如有任何爭議， Ares 保留最終決定權。<br>
+            15.King's 保留隨時更改使用條款及細則之權利，而不會作另行通知。如有任何爭議， King's 保留最終決定權。<br>
           </p>
       </div>
       <van-field
@@ -93,6 +93,7 @@
           name="checkbox"
           label=""
           :rules="[{ required: true, message: '請同意條款及細則'}]"
+          class="alertCell"
       >
 
         <template #input>
@@ -108,7 +109,7 @@
       <van-cell-group class="priceLabel" hidden><van-field label="總金額：" size="large" v-model="price" readonly /></van-cell-group>
       <van-cell class="alertCell" title="注意：洗衣上門為洗完後派送上門的服務，而非上門收件的服務！" size="large" />
       <div style="margin: 16px;">
-        <van-button round block type="primary" native-type="submit">
+        <van-button round block type="primary" class="submit" native-type="submit">
           提交
         </van-button>
       </div>
@@ -130,9 +131,6 @@ export default {
     if(VueCookies.get("LoginStatus")==null){
       window.location.href = "./";
     }
-  },
-  props:{
-    RentAmount:Number,
   },
   data(){
     return{
@@ -175,6 +173,7 @@ export default {
                 { text: "柴灣吉勝街12號達藝工業中心15樓09室(祥利街21-27號達藝工業中心停車場門口可入)", value: "HKG-P030" },
                 { text: "北角道8號隆運大廈1樓C,D室", value: "HKG-P031" },
                 { text: "太古鰂魚涌英皇道1065號東達中心4樓405B室(近太古地鐵站A1出口)", value: "HKG-P035" },
+                { text: "筲箕灣道57-87號太安樓地下A24B舖", value: "HKG-P280" },
               ]
             },
             {
@@ -359,8 +358,7 @@ export default {
       this.price=88;
       if(this.switchChecked==true){
         console.log(this.switchChecked);
-        // amounttext.innerHTML="總金額:$"+(68+this.RentAmount);
-        this.price+=this.RentAmount;
+        this.price+=this.rentAmount;
         console.log(this.price);
       }
       //if choose home delivery
@@ -372,14 +370,12 @@ export default {
       this.price=88;
       if(this.deliveryChecked==true){
         console.log(this.deliveryChecked);
-        // amounttext.innerHTML="總金額:$"+(68+this.RentAmount);
         this.price+=30;
         console.log(this.price);
       }
       //if choose bag
-      this.price+=this.RentAmount*this.switchChecked;
+      this.price+=this.rentAmount*this.switchChecked;
       amounttext.innerHTML="總金額: $"+this.price;
-      //if delivery tag change,clear district and address
       this.districtValue="";
       this.receiptCity="";
       this.receiptDistrict="";
@@ -420,7 +416,7 @@ export default {
         packageNumber:"1",
         pickUpPoint:this.AddressValue,
         rentTag:this.switchChecked,
-        packageRentCost:this.switchChecked*this.RentAmount,
+        packageRentCost:this.switchChecked*this.rentAmount,
         receiptCity:this.receiptCity,
         receiptDistrict:this.receiptDistrict,
         receiptAddress:this.addressDetail,
@@ -479,13 +475,11 @@ h3 {
   margin: 10px 0 0;
   text-align: center;
 }
-ul {
-  list-style-type: none;
-  padding: 0;
+.amount h2{
+  color: #000;
 }
-li {
-  display: inline-block;
-  margin: 0 10px;
+.alertCell{
+  background-color: #FAEE00;
 }
 a {
   color: #42b983;

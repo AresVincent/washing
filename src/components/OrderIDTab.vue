@@ -58,7 +58,7 @@ export default {
 <style scoped>
 .body{
   /*padding: 0px 10px 0px 10px;*/
-  border: 5px solid #1989fa;
+  border: 5px solid #E49C2E;
   margin-bottom: 20px;
   background: white;
   padding-left: 5px;
@@ -71,7 +71,7 @@ export default {
   color: white;
 }
 .head{
-  background: #1989fa;
+  background: #E49C2E;
   padding: 0px -10px 0px -10px;
   width:100%;
 }

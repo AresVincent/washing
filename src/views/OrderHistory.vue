@@ -6,7 +6,7 @@
         <h3>訂單記錄</h3>
       </van-col>
       <van-col span="10">
-        <van-dropdown-menu>
+        <van-dropdown-menu class="sortingMenu" active-color="#E49C2E">
           <van-dropdown-item @change="Filter" v-model="value1" :options="option1" />
         </van-dropdown-menu>
       </van-col>
@@ -46,7 +46,6 @@ import OrderIDTab from "../components/OrderIDTab";
 import axios from "axios";
 import {Toast} from "vant";
 import VueCookies from "vue-cookies";
-import Global from '../components/Common';
 
 export default {
   name: 'OrderHistory',
@@ -67,7 +66,6 @@ export default {
       list:undefined,
       reverseList: undefined,
       master_list: undefined,
-      rentAmount:Global.rentAmount
     }
   },
   beforeMount() {
@@ -134,9 +132,8 @@ export default {
 h3{
   margin:0px!important;
   padding-top: 1rem;
+  padding-left:1rem ;
   margin-bottom: 1rem!important;
 }
-.container{
-  padding: 0px 10px 50px 10px;
-}
+
 </style>

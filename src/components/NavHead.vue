@@ -1,6 +1,6 @@
 <template>
   <div class="nav-header">
-    <van-nav-bar v-if="isShowHead==0"
+    <van-nav-bar class="nav-content" v-if="isShowHead==0"
         title="「 隨 • 便 • 洗 」"
         left-text="返回"
         right-text="登入"
@@ -8,7 +8,7 @@
         @click-left="onClickLeft"
         @click-right="onClickRight"
     />
-    <van-nav-bar v-else-if="isShowHead==1"
+    <van-nav-bar class="nav-content" v-else-if="isShowHead==1"
         title="「 隨 • 便 • 洗 」"
         left-text="返回"
         right-text="註冊"
@@ -16,7 +16,7 @@
         @click-left="onClickLeft"
         @click-right="onClickRightToRegist"
     />
-    <van-nav-bar v-else
+    <van-nav-bar class="nav-content" v-else
         title="「 隨 • 便 • 洗 」"
         left-text="返回"
         right-text="登出"
@@ -58,10 +58,6 @@ export default {
 h2 {
   margin-bottom: 20px;
 }
-ul {
-  list-style-type: none;
-  padding: 0;
-}
 li {
   display: inline-block;
   /*margin: 0 10px;*/
@@ -69,4 +65,9 @@ li {
 a {
   color: #42b983;
 }
+.van-nav-bar{
+  background-color: #FAEE00;
+}
+
+
 </style>
