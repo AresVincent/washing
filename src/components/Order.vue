@@ -7,7 +7,7 @@
     />
     <van-form @submit="onSubmit">
       <!--Buy/Rental Washing Bag-->
-      <van-cell center title="購買洗衣袋?" size="large">
+      <van-cell v-if="typeValue==0||deliveryChecked==false" center title="購買洗衣袋?" size="large">
         <template #right-icon>
           <van-switch v-model="switchChecked" @change="RentalTagChanged" size="24" inactive-color="#dcdee0" />
         </template>
@@ -18,8 +18,23 @@
           <van-switch v-model="deliveryChecked" @change="DeliveryTagChanged" size="24" inactive-color="#dcdee0" />
         </template>
       </van-cell>
-      <!--Address-->
+      <!-- 上門服務 -->
+      <div v-if="deliveryChecked==true">
+        <van-field
+            v-model="typeText"
+            is-link
+            required
+            readonly
+            label="上門服務方式"
+            placeholder="請選擇"
+            @click="showService = true"
+            size="large"
+            :rules="[{ required: true, message: '請選擇服務種類' }]"
+        />
+      </div>
+      <!--pickuppoint-->
       <van-field
+          v-if="typeValue==0||deliveryChecked==false"
           v-model="fieldValue"
           is-link
           required
@@ -51,6 +66,11 @@
         :rules="[{ required: true, message: '請輸入您的詳細地址' }]"
         />
       </div>
+      <!-- service popup -->
+      <van-popup v-model:show="showService" round position="bottom">
+        <van-picker  title="標題" :columns="typeCol" @confirm="onServiceFinish" @cancel="showService=false"
+          confirm-button-text	="確認" :default-index="typeValue" />
+      </van-popup>
       <!-- district popup -->
       <van-popup v-model:show="showDistrict" round position="bottom">
         <van-area :area-list="districtOpt" @confirm="onDistrictFinish" @cancel="showDistrict=false"
@@ -122,7 +142,6 @@
 import axios from "axios";
 import {Toast} from "vant";
 import VueCookies from "vue-cookies";
-// import $ from "jquery";
 
 export default {
   name:'Order',
@@ -136,15 +155,17 @@ export default {
     return{
       switchChecked: false,
       deliveryChecked:false,
-      switchFreeChecked:false,
       checked:false,
       checkboxdisable:true,
       show: false,
       showDistrict:false,
+      showService:false,
       LoginStatus: VueCookies.get("LoginStatus"),
       username: VueCookies.get("Name"),
       phone: VueCookies.get("Phone"),
       fieldValue: "",
+      typeValue:0,
+      typeText:"上門派送",
       districtValue:"",
       AddressValue: "",
       receiptCity:"",
@@ -350,9 +371,11 @@ export default {
           810309: '離島區',
         }
       },
+      typeCol:[{text:"上門派送",value:0},{text:"上門收派",value:1}]
     }
   },
   methods:{
+    //是否租用洗衣袋
     RentalTagChanged(){
       let amounttext = document.getElementById("total");
       this.price=88;
@@ -361,17 +384,29 @@ export default {
         this.price+=this.rentAmount;
         console.log(this.price);
       }
+      if(this.typeValue==1){
+        this.switchChecked=false;
+        this.price+=this.homeTakeFee
+      }
       //if choose home delivery
-      this.price+=30*this.deliveryChecked;
+      this.price+=this.homePickupFee*this.deliveryChecked;
       amounttext.innerHTML="總金額: $"+this.price;
     },
+    // 是否選擇洗衣上門
     DeliveryTagChanged(){
       let amounttext = document.getElementById("total");
       this.price=88;
       if(this.deliveryChecked==true){
         console.log(this.deliveryChecked);
-        this.price+=30;
+        this.price+=this.homePickupFee;
         console.log(this.price);
+      }else{
+        this.typeValue=0;
+        this.typeText="上門派送";
+      }
+      if(this.typeValue==1){
+        this.switchChecked=false;
+        this.price+=this.homeTakeFee;
       }
       //if choose bag
       this.price+=this.rentAmount*this.switchChecked;
@@ -380,7 +415,9 @@ export default {
       this.receiptCity="";
       this.receiptDistrict="";
       this.addressDetail="";
+      console.log(this.typeValue)
     },
+    // 校驗客戶是否劃至底部
     onScroll ({ target: { scrollTop, clientHeight, scrollHeight }}) {
       if (scrollTop + clientHeight >= scrollHeight) {
         console.log("We are at bottom");
@@ -401,6 +438,7 @@ export default {
       // this.fieldValue = selectedOptions.map((option) => option.text).join("/");
       console.log(this.AddressValue);
     },
+    // 提交訂單
     onSubmit(){
       // console.log(this.switchChecked);
       const Num = Math.floor(100000000 + Math.random() * 900000000);
@@ -449,14 +487,19 @@ export default {
           });
       console.log("Name: ",this.username);
       console.log("Phone: ",this.phone);
-      console.log("Total Price: ",this.switchChecked*40 + 88);
+      console.log("Total Price: ",this.switchChecked*this.rentAmount + 88);
       console.log("AddressCode: ",this.AddressValue);
     },
+    // 選擇派送地址
     onDistrictFinish(target){
       this.showDistrict=false;
       console.log(target);
       let strText="";
       for(let i=1;i<target.length;i++){
+        if(target[i].name==""){
+          Toast("地址格式錯誤，請重新選擇!");
+          return;
+        }
         strText+=target[i].name;
       }
       this.districtValue=strText;
@@ -464,6 +507,24 @@ export default {
       this.receiptDistrict=target[2].name;
       console.log(this.receiptCity);
       console.log(this.receiptDistrict);
+    },
+    // 選擇服務類型
+    onServiceFinish(target){
+      let amounttext = document.getElementById("total");
+      this.price=88;
+      this.showService=false;
+      this.typeText=target.text;
+      this.typeValue=target.value;
+      if(this.typeValue==1){
+        this.switchChecked=false;
+        this.price+=this.homeTakeFee;
+        this.fieldValue="";
+        this.AddressValue="";
+      }
+      //if choose home delivery
+      this.price+=this.rentAmount*this.switchChecked;
+      this.price+=this.homePickupFee*this.deliveryChecked;
+      amounttext.innerHTML="總金額: $"+this.price;
     }
   }
 };

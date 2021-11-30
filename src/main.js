@@ -43,7 +43,9 @@ app.use(Icon);
 app.use(Tabs);
 
 axios.defaults.baseURL=baseUrl;
-app.config.globalProperties.rentAmount=40
+app.config.globalProperties.rentAmount=40;
+app.config.globalProperties.homePickupFee=30;
+app.config.globalProperties.homeTakeFee=12;
 // axios.defaults.baseURL = 'http://192.168.100.103:8083';
 // axios.defaults.baseURL = 'http://192.168.100.104:8777';
 

@@ -1,0 +1,55 @@
+html{
+    background-color: #FAEE00;
+}
+.logo{
+    width: 200px;
+    height: auto;
+}
+@media screen and (max-width:576px) {
+    .logo{
+        width: 100%;
+    }
+}
+h3 {
+    margin: 40px 0 0;
+}
+ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  li {
+    display: inline-block;
+    margin: 0 10px;
+}
+a {
+    color: blue;
+}
+.van-tabbar-item--active{
+    color: #E49C2E;
+}
+.submit,#verifyBtn{
+   background-color: #E49C2E;
+   border: none;
+}
+.van-checkbox .van-icon{
+    border-color:#E49C2E ;
+}
+
+.van-checkbox__icon--checked .van-icon{
+    background-color: #E49C2E;
+    border-color: #E49C2E;
+}
+.van-nav-bar__text{
+    color:#E49C2E;
+    font-weight: 900;
+}
+.van-nav-bar .van-icon{
+    color:#E49C2E;
+}
+.van-tabs__line{
+    background-color: #E49C2E;
+}
+.van-dropdown-menu__bar{
+    background-color: #FAEE00;
+    box-shadow: none;
+}

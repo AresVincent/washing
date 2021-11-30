@@ -94,11 +94,14 @@ export default {
         .then((AresHistoryResponse)=>{
           console.log(AresHistoryResponse);
           if(AresHistoryResponse.data.code == 200){
-            this.list=AresHistoryResponse.data.data;
-            this.reverseList = AresHistoryResponse.data.data.slice().reverse();
-            this.master_list = AresHistoryResponse.data.data.slice().reverse();
-            console.warn(AresHistoryResponse.data.data);
-            console.log(this.list)
+            let tmpArray=AresHistoryResponse.data.data;
+            tmpArray=tmpArray.sort(function(a,b){
+              return new Date(a.orderTime.replaceAll("-","/"))>new Date(b.orderTime.replaceAll("-","/"))? 1:-1;
+            })
+            this.list=tmpArray;
+            this.reverseList = tmpArray.slice().reverse();
+            this.master_list = tmpArray.slice().reverse();
+            // console.log(this.list);
             // let orderInfo = AresHistoryResponse.data.data[AresHistoryResponse.data.data.length-1];
             // console.log(orderInfo);
             Toast(AresHistoryResponse.data.msg);
