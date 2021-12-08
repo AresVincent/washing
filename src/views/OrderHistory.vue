@@ -74,7 +74,7 @@ export default {
       window.location.href = "./";
     }else{
         // axios.get("http://121.199.54.43:8888/api/service/runCornJob").
-      axios.get("/api/service/runCornJob").
+      axios.get("/api/service/washing/runCornJob").
       then((RefreshResponse)=>{
         if(RefreshResponse.data.code == 200){
           console.log(RefreshResponse.data.msg);

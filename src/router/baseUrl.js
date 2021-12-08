@@ -8,7 +8,7 @@ switch(env){
         baseUrl='http://192.168.100.104:8777';
         break;
     case "product":
-        baseUrl="http://121.199.54.43:8888";
+        baseUrl="https://121.199.54.43:8888";
         break;
     default:break;
 }
