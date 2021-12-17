@@ -6,8 +6,11 @@ import '@vant/touch-emulator'
 import { Icon } from 'vant'
 import {Popup} from 'vant'
 import {Overlay} from 'vant'
+import {Step,Steps} from 'vant'
 import router from './router'
 import axios from 'axios'
+import {Loading} from "vant"
+import { Divider } from 'vant';
 import baseUrl from './router/baseUrl'
 import  "./assets/css/main.css"
 
@@ -41,7 +44,10 @@ app.use(Area);
 app.use(Tab);
 app.use(Icon);
 app.use(Tabs);
-
+app.use(Step);
+app.use(Steps);
+app.use(Loading)
+app.use(Divider)
 axios.defaults.baseURL=baseUrl;
 app.config.globalProperties.rentAmount=40;
 app.config.globalProperties.homePickupFee=30;

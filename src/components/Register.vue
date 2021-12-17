@@ -23,6 +23,7 @@
         <van-popup v-model:show="showPicker" position="bottom">
           <van-picker
               show-toolbar
+              confirm-button-text	="確認"
               :columns="columns"
               @confirm="onConfirm"
               @cancel="showPicker = false"

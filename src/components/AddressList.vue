@@ -52,7 +52,7 @@ var arrayHK=[];
 var arrayNT=[];
 export default({
     name:'AddressList',
-    beforeMount(){
+    mounted(){
         // console.log(VueCookies.get("LoginStatus"));
         // if(VueCookies.get("LoginStatus")==null){
         // window.location.href = "./";
@@ -84,28 +84,6 @@ export default({
 
     },
     setup() {
-        // const areaList={
-        //     province_list: {
-        //         110000: '香港特別行政區',
-                
-        //     },
-        //     city_list: {
-        //         110100: '九龍',
-        //         110200: '香港島',
-        //         110300: '新界',
-        //     },
-        //     county_list: {
-        //         110101: '东城区',
-        //         110102: '西城区',
-                
-        //     },
-        // };
-        // return{
-        //     hkAddress:arrayHK,
-        //     kwAddress:arrayKW,
-        //     ntAddress:arrayNT
-        // }
-        
         
     },
     data(){
