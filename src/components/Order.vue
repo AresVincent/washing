@@ -10,9 +10,10 @@
     <van-notice-bar
       color="#F71919"
       left-icon="volume-o"
-      text="King's 提提你：我們依家有得將洗完既衫送到你屋企門口啦！唔想自己拎黎拎去？洗衣上門幫到你！"
+      text="King's洗衣，實冇得輸！現時130蚊即可享受足不出戶，包收包送嘅洗衣服務！"
     />
     <van-form @submit="onSubmit">
+      <div class="orderContainer">
       <!--Buy/Rental Washing Bag-->
       <van-cell v-if="typeValue==0||deliveryChecked==false" center title="購買洗衣袋?" size="large">
         <template #right-icon>
@@ -94,27 +95,54 @@
             @finish="onFinish"
         />
       </van-popup>
-      
+
       <div id="flux" class="form-group" @scroll="onScroll">
           <h3 style="margin-bottom:0px;">King's服務條款及細則</h3>
           <p class="content" style="font-size:16px;line-height: 3rem;margin-top:0;">
-            1. 磅洗服務，包括衣物清洗、焗乾及摺疊。 <br>
-            2. 每次惠顧客人需填寫正確的電話及姓名，如信息不正確導致後續收不到提件碼、包裹被冒領等問題，本公司恕不負責。<br>
-            3. 客人需一次性現金支付洗衣費及使用指定洗衣袋之費用，且不提供任何的收據。<br>
-            4. 洗好的衣服到達自提點上架後，有2日的免租期，客人需於免租期內提取包裹。<br>
-            5. 客人如超過免租期提取包裹，自提點將有機會收取客人HKD10/天。<br>
-            6. 包裹到達自提點上架後，超過2日免租期未領取，自提點有權將包裹退回4PX分拔倉，倉租為HKD10/天。<br>
-            7. 包裹如退回4PX分拔倉後，客人需要再次送到自提點取件，需支付HKD20的行政費，到達自提點後由客人現金支付。<br>
-            8. 洗衣機轉動清洗衣物時，總有一定的機械動作；清洗後衣物需經高溫焗乾，如有染色、脫色、破損、縮水，本公司恕未能負責。<br>
-            9. 取衣時確保洗衣袋和索帶的完整性，衣物領回後，如有遺失，本公司恕未能負責。<br>
-            10.取衣時，如洗衣袋有破損，需當面提出，並聯絡King's以後續處理。如因洗衣袋破損導致的內部物失破損、遺失，最高賠償額為HKD200/袋。<br>
-            11. 如自提點或中轉過程中遺失包裹，最高賠償額為HKD200/袋。<br>
-            12. 磅洗衣物，遇上不可抗力的情況，或任何意外之損失，本公司恕未能負責。<br>
-            13. 客人請確保交付之衣物內沒有任何貴重物品，如有任何遺失，本公司恕未能負責。<br>
-            14. 如因假期或運輸問題有所延誤，則不作另行通知。<br>
-            15.King's 保留隨時更改使用條款及細則之權利，而不會作另行通知。如有任何爭議， King's 保留最終決定權。<br>
+            1. 磅洗服務，包括衣物清洗、烘乾及摺疊。<br/>
+            2. 每次惠顧客人需填寫正確的電話及姓名，如信息不正確
+            導致後續(包括但並不限於：收不到提件碼、包裹被冒領等)
+            問題，本公司恕不負責。<br/>
+            3. 客人需一次性網上支付洗衣費及使用指定洗衣袋之費
+            用，且不提供任何收據。<br/>
+            4. 信用卡手續費以該公司收費為準，手續費不是由本公司
+            收取。<br/>
+            5. 一律扣帳問題本公司恕不負責，客人需自行處理。<br/>
+            6. 客人務必留意電話通知，運輸公司提供兩次上門機會。
+            如兩次派送失敗將退回倉庫倉租為 HKD＄10/天。<br/>
+            7. 完成洗衣程序到達自提點上架後，有 2 日的免租期，客
+            人需於免租期內提取包裹。<br/>
+            8. 客人如免租期後提取包裹，自提點將有機會收取客人
+            HKD＄10/天。<br/>
+            9. 包裹到達自提點上架後，超過 2 日免租期未領取，自提
+            點有權將包裹退回 4PX 分拔倉，倉租為 HKD＄10/天。<br/>
+            10. 包裹如退回 4PX 分拔倉後，客人需要再次送到自提點取
+            件，需支付 HKD＄20 的行政費，到達自提點後由客人現金
+            支付。<br/>
+            11. 洗衣機轉動清洗衣物時，總有一定的機械動作；清洗後
+            衣物需經高溫烘乾，如有染色、脫色、破損、縮水，本公
+            司恕未能負責。<br/>
+            12. 取衣時確保洗衣袋和索帶的完整性，衣物領回後，如有
+            遺失，本公司恕未能負責。<br/>
+            13. 取衣時，如洗衣袋有破損，需當面提出，並聯絡 King's
+            作後續處理。如因洗衣袋破損導致的內部物失破損、遺
+            失，最高賠償額為 HKD200/袋。<br/>
+            14. 洗衣袋在運送過程中的自然耗損本公司恕不負責。<br/>
+            15. 如自提點或中轉過程中遺失包裹，最高賠償額為
+            HKD200/袋。<br/>
+            16. 磅洗衣物，遇上不可抗力的情況，或任何意外之損失，
+            本公司恕未能負責。<br/>
+            17. 客人請確保交付之衣物內沒有任何貴重物品，如有任何
+            遺失，本公司恕未能負責。<br/>
+            18. 如因假期或運輸問題有所延誤，則不作另行通知。<br/>
+            19. 樓梯費用為$30/層，由司機收取，客人也可以與司機預
+            約在地面交收，則不收取任何額外費用。<br/>
+            20. King's 保留隨時更改使用條款及細則之權利，而不會作
+            另行通知。如有任何爭議， King's 保留最終決定權
           </p>
       </div>
+      </div>
+
       <van-field
           required
           name="checkbox"
@@ -131,10 +159,10 @@
         </template>
       </van-field>
       <div class="amount">
-        <h2 id="total" style="padding-right:20px;">總金額: ${{price}}</h2>
+        <h2 id="total" style="padding-right:20px;margin-top:0px">總金額: ${{price}}</h2>
       </div>
       <van-cell-group class="priceLabel" hidden><van-field label="總金額：" size="large" v-model="price" readonly /></van-cell-group>
-      <div style="margin: 16px;">
+      <div style="margin: 20px;">
         <van-button round block type="primary" class="submit" native-type="submit">
           提交
         </van-button>
@@ -149,8 +177,8 @@
             <van-col span="10"><van-button :class="activePayment==0 ? 'paymentBtn active':'paymentBtn'" @click="activePayment=0">信用卡支付</van-button></van-col>
             <van-col span="10"><van-button :class="activePayment==1 ? 'paymentBtn active':'paymentBtn'" @click="activePayment=1">轉賬支付</van-button></van-col>
           </van-row>
-          <stripe-card v-if="activePayment==0" :secret="clientSecret" :originPrice="originAmount" :stripePrice="stripeAmount" :orderNo="orderNumber" :back="backToPrevious" :forward="goToNext"></stripe-card>
-          <transfer v-if="activePayment==1" :originPrice="originAmount" :stripePrice="stripeAmount" :orderNo="orderNumber" :forward="goToNext" ></transfer>
+          <stripe-card v-if="activePayment==0" :secret="clientSecret" :stripePrice="stripeAmount" :orderNo="orderNumber" :back="backToPrevious" :forward="goToNext"></stripe-card>
+          <transfer v-if="activePayment==1" :originPrice="originAmount" :orderNo="orderNumber" :forward="goToNext" :back="backToPrevious" ></transfer>
         </div>
   </div>
   <div class="resultBlock" v-if="activeStep==2">
@@ -175,7 +203,7 @@ import Audit from "./result/Audit.vue"
 import Success from "./result/Success.vue"
 
 //options為自提點選項,districtOpt為十八區的選項
-import {options,districtOpt} from "../config/index"
+import {options,districtOpt,ReturnPickUp} from "../config/index"
 
 
 // SUN-HF,SUN-YL,SUN-FC,SUN-TEST(HKG-P000)
@@ -303,8 +331,8 @@ export default {
       amounttext.innerHTML="總金額: $"+this.price;
     },
     // 校驗客戶是否劃至底部
-    onScroll ({ target: { scrollTop, clientHeight, scrollHeight }}) {
-      if (scrollTop + clientHeight >= scrollHeight) {
+    onScroll (e) {
+      if (Math.ceil(e.target.scrollTop) +Math.ceil(e.target.clientHeight) >= e.target.scrollHeight) {
         console.log("We are at bottom");
         this.checked = true;
         document.getElementById('accept').removeAttribute('disabled');
@@ -327,8 +355,17 @@ export default {
     onSubmit(){
       console.log(this.switchChecked);
       let testPickUp="HKG-P000";
-      if(process.env.NODE_ENV!="product"){
-        this.AddressValue=testPickUp;
+      if(process.env.NODE_ENV!="production"){
+        if(this.typeValue==1){
+          this.AddressValue="SUN-TEST";
+        }else{
+          this.AddressValue=testPickUp;
+        }
+      }else{
+        if(this.typeValue==1){
+          // check delivery to which store
+         this.AddressValue=ReturnPickUp(this.receiptDistrict);
+        }
       }
       let ares_data = {
         type:'',
@@ -423,10 +460,13 @@ a {
 .amount{
   text-align: right;
 }
+.orderContainer{
+  min-height: 430px;
+  background: #fff;
+}
 .form-group{
-  height:220px;
+  height:280px;
   width:100%;
-  border:1px solid #ccc;
   background: white;
   font:16px/26px Georgia, Garamond, Serif;
   overflow:auto;
@@ -438,11 +478,14 @@ a {
   color:#F71919;
   text-align: center;
 }
+.van-cell.alertCell::after{
+  border: none;
+}
 #flux .content{
   padding: 0 10px;
 }
 .stepBox,.paymentForm,.resultBlock{
-  padding:0 15px;
+  padding:0 15px 15px 15px;
 }
 .paymentRow{
   padding:10px;

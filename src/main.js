@@ -11,7 +11,7 @@ import router from './router'
 import axios from 'axios'
 import {Loading} from "vant"
 import { Divider } from 'vant';
-import baseUrl from './router/baseUrl'
+// import baseUrl from './router/baseUrl'
 import  "./assets/css/main.css"
 
 const app = createApp(App).use(router);
@@ -48,12 +48,10 @@ app.use(Step);
 app.use(Steps);
 app.use(Loading)
 app.use(Divider)
-axios.defaults.baseURL=baseUrl;
+axios.defaults.baseURL=process.env.VUE_APP_BASE_URL;
 app.config.globalProperties.rentAmount=40;
 app.config.globalProperties.homePickupFee=30;
 app.config.globalProperties.homeTakeFee=12;
-// axios.defaults.baseURL = 'http://192.168.100.103:8083';
-// axios.defaults.baseURL = 'http://192.168.100.104:8777';
 
-
+console.log(process.env);
 app.mount('#app');

@@ -27,7 +27,7 @@
           :OrderNum = "item.waybillNo>0?item.waybillNo:item.orderNo"
           :Time = "item.orderTime"
           :RentalTag ="item.rentTag=='true'?1:0"
-          :TotalAmount = "item.cost"
+          :TotalAmount = "item.total==null?item.cost:item.total"
           :Name = "item.consigneeName"
           :Phone ="item.consigneePhone"
           :homePickup="item.homePickupTag"
@@ -73,7 +73,6 @@ export default {
     if(VueCookies.get("LoginStatus")==null||VueCookies.get("Phone")==null){
       window.location.href = "./";
     }else{
-        // axios.get("http://121.199.54.43:8888/api/service/runCornJob").
       axios.get("/api/service/washing/runCornJob").
       then((RefreshResponse)=>{
         if(RefreshResponse.data.code == 200){

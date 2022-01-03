@@ -201,7 +201,17 @@ const options=[
     }
   };
 
+const ReturnPickUp=(point)=>{
+  if(YuenLong.includes(point)){
+    return "SUN-FC";
+  }
+  if(YauLei.includes(point)){
+    return "SUN-YL";
+  }
+  if(HengFa.includes(point)){
+    return "SUN-HF";
+  }
+}
 
 
-
-export {stripeToken,options,districtOpt,YuenLong,YauLei,HengFa}
+export {stripeToken,options,districtOpt,ReturnPickUp}

@@ -25,7 +25,7 @@
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <a href="/register">註冊</a>
           </div>
-          <div class="button_center" style="margin: 16px;">
+          <div class="button_center" style="margin: 20px;">
             <van-button class="submit" round block type="primary" native-type="submit">
               提交
             </van-button>

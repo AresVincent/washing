@@ -1,9 +1,10 @@
 <template>
     <h2>需付款：HK${{stripePrice}}</h2>
     <form >
-    <div ref="payment" id="payment">
+    <div ref="payment" id="payment" style="min-height:328px;">
 
     </div>
+    <van-cell title="溫馨提示：信用卡支付需要額外支付一定額度的手續費！" size="large" title-style="color:#a6a6a6" class="alertCell"></van-cell>
     <van-row type="flex" justify="space-around" class="paymentRow">
         <van-col span="10"><van-button plain class="btn" @click="back">返回上一步</van-button></van-col>
         <van-col span="10"><van-button plain class="btn"  @click="paymentSubmit">付款</van-button></van-col>
@@ -88,7 +89,7 @@ export default {
                 let data= response.paymentIntent;
                 let updateDate={
                     "orderNo":this.orderNo,
-                    "paymentCode":"STR"+data.payment_method_types[0],
+                    "paymentCode":"STR_"+data.payment_method_types[0],
                 };
                 let header={"Content-Type" : "application/json; charset=utf-8"}
                 switch(data.status){
@@ -150,5 +151,12 @@ h2{
     color: #fff;
     background: #E49C2E;
     margin: 10px 0;
+}
+.paymentForm .alertCell::after{
+    border: none;
+}
+.paymentForm .alert{
+    color: #e6e6e6;
+
 }
 </style>

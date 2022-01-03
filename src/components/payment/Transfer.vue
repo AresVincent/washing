@@ -24,8 +24,11 @@
     <pay-me v-if="transferValue=='CS_PAM'"></pay-me>
     <ali-pay v-if="transferValue=='CS_ALI'"></ali-pay>
     <wechat-pay v-if="transferValue=='CS_WEC'"></wechat-pay>
-    <van-row type="flex" justify="space-around"><van-col span="10"><van-button @click="paymentSubmit" class="btn">確認付款</van-button></van-col></van-row>
 </div>
+<van-row type="flex" justify="space-around" class="paymentRow">
+    <van-col span="10"><van-button plain class="btn" @click="back">返回上一步</van-button></van-col>
+    <van-col span="10"><van-button plain class="btn"  @click="paymentSubmit">確認付款</van-button></van-col>
+</van-row>
 <van-overlay :show="showLoading">
         <div class="wrapper">
             <van-loading color="#FAEE00" size="56px"/>
@@ -48,7 +51,8 @@ export default {
     props:{
         orderNo:String,
         originPrice:String,
-        forward:Function
+        forward:Function,
+        back:Function
     },
     components:{
         FPS,
@@ -64,9 +68,9 @@ export default {
             transferValue:"CS_FPS",
             paymentColumns:[
                 {text:"轉數快",value:"CS_FPS"},
-                {text:"PayMe",value:"CS_PAM"},
-                {text:"Alipay-HongKong",value:"CS_ALI"},
-                {text:"WechatPay-HongKong",value:"CS_WEC"},
+                // {text:"PayMe",value:"CS_PAM"},
+                // {text:"Alipay-HongKong",value:"CS_ALI"},
+                // {text:"WechatPay-HongKong",value:"CS_WEC"},
             ],
         }
     },
@@ -103,6 +107,7 @@ export default {
 <style scoped>
 .FPSBox{
     padding:0 15px;
+    min-height: 468px;
 }
 .FPSBox .van-cell{
     padding-left: 0px;
@@ -114,5 +119,12 @@ export default {
     align-items: center;
     justify-content: center;
     height: 100%;
+}
+.btn{
+    width: 100%;
+    border-radius: 10px;
+    color: #fff;
+    background: #E49C2E;
+    margin: 10px 0;
 }
 </style>

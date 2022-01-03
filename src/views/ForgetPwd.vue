@@ -30,7 +30,4 @@ export default {
   text-align: center;
   padding: 0px 15px 0px 15px;
 }
-.register,.order-form{
-  padding: 0px 15px 0px 15px;
-}
 </style>

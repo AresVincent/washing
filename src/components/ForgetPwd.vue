@@ -144,7 +144,7 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .forgetPwd{
-  padding: 15px;
+   padding: 0px 15px 0px 15px;
 }
 .submit{
   /*margin-left: 27px;*/
