@@ -5,7 +5,7 @@
         <van-cell title="賬戶名稱" value="King's Cargo Logistics Limited" />
         <!-- <van-cell title="" value="" /> -->
         <p>您可透過網上及流動理財使用「轉數快」進行即時轉賬，或使用支援「轉數快」的儲值支付工具。</p>
-        <p>注意：轉賬後請發送圖片至Whatsapp：+852 69300097 進行驗證,否則將視為無效訂單！</p>
+        <p>注意：轉賬後請發送圖片至<a href="http://wa.me/85269300097" target="_blank">Whatsapp：+852 69300097</a> 進行驗證,否則將視為無效訂單！</p>
     </div>
 </template>
 <script>
