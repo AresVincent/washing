@@ -376,7 +376,7 @@ export default {
         consigneePhone:this.phone,
         homePickupTag:this.deliveryChecked,
         rentTag:this.switchChecked,
-        cost:this.price-this.switchChecked*this.rentAmount,
+        cost:this.price,
         packageRentCost:this.switchChecked*this.rentAmount,
         // pickUpPoint:this.AddressValue,
         pickUpPoint:this.AddressValue,
@@ -402,6 +402,11 @@ export default {
         Toast("請勿多次提交訂單!");
         return;
       }
+      //新年假期不提供洗衣服務
+      if(new Date().getTime()>=new Date("2022/2/1").getTime()&&new Date().getTime()<=new Date("2022/2/3").getTime()){
+            Toast("因農曆新年假期關係，2022年1月30日至2022年2月3日的收件服務將會暫停，如因此帶來任何不便，深感抱歉！")
+            return;
+          }
       this.isLastSubmitFinished=false;
       axios.post("/package/createOrder", ares_data, {aresheaders})
           .then((AresResponse)=>{
