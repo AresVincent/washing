@@ -2,12 +2,17 @@
   <NavHead isShowHead="2"/>
   <div class="container">
     <van-row>
-      <van-col span="14">
+      <van-col span="8">
         <h3>訂單記錄</h3>
       </van-col>
-      <van-col span="10">
+      <van-col span="8">
         <van-dropdown-menu class="sortingMenu" active-color="#E49C2E">
           <van-dropdown-item @change="Filter" v-model="value1" :options="option1" />
+        </van-dropdown-menu>
+      </van-col>
+      <van-col span="8">
+        <van-dropdown-menu class="sortingMenu" active-color="#E49C2E">
+          <van-dropdown-item @change="typeFilter" v-model="typeValue" :options="typeOption" />
         </van-dropdown-menu>
       </van-col>
     </van-row>
@@ -63,6 +68,14 @@ export default {
         { text: '從最舊到最新', value: 0 },
         // { text: '昨天的記錄', value: 2 },
       ],
+      typeValue:"all",
+      typeOption:[
+        {text:'全部',value:"all"},
+        {text:'上門派送',value:"SELF_PICK"},
+        {text:'上門收送',value:"PICK_PICK"},
+        {text:'自提點',value:"SELF_SELF"}
+
+      ],
       list:undefined,
       reverseList: undefined,
       master_list: undefined,
@@ -115,16 +128,26 @@ export default {
   },
   methods:{
     Filter(){
-      console.log(this.value1);
-      if(this.value1 == 1){
-       this.master_list = this.reverseList;
-      }else if(this.value1 == 0){
-        this.master_list = this.list;
-      }else{
-        console.log("")
-        return ;
-      }
+      let temp_master=this.master_list.slice();
+      //  this.master_list = this.reverseList;
+      temp_master.reverse();
+      this.master_list=temp_master.slice();
     },
+    typeFilter(){
+      let tempList=[];
+      let tempArray=this.list.slice();
+      tempArray.forEach(item=>{
+        if(this.typeValue=="all"){
+          tempList=this.list.slice();
+          return ;
+        }
+        if(item.type==this.typeValue){
+          tempList.push(item);
+        }
+      });
+      console.log(this.typeValue)
+      this.master_list=tempList.slice();
+    }
   },
 }
 
