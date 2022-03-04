@@ -28,9 +28,9 @@
         <p>
           <span>收貨地址：{{ AddressValue }}</span>
         </p>
-        <p  v-if="homePickup=='true'">
+        <!-- <p  v-if="homePickup=='true'">
           <span>自提點地址:{{storeAddress}}</span>
-        </p>
+        </p> -->
       </div>
     </div>
   </div>

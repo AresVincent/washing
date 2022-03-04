@@ -135,16 +135,21 @@ export default {
     },
     typeFilter(){
       let tempList=[];
-      let tempArray=this.list.slice();
-      tempArray.forEach(item=>{
-        if(this.typeValue=="all"){
-          tempList=this.list.slice();
-          return ;
-        }
-        if(item.type==this.typeValue){
-          tempList.push(item);
-        }
-      });
+      let tempArray=[];
+      if(this.value1==1){
+          tempArray=this.list.slice().reverse()
+      }else{
+          tempArray=this.list.slice();
+      }
+      if(this.typeValue=="all"){
+        tempList=tempArray.slice();
+      }else{
+        tempArray.forEach(item=>{
+          if(item.type==this.typeValue){
+            tempList.push(item);
+          }
+        });
+      }
       console.log(this.typeValue)
       this.master_list=tempList.slice();
     }
