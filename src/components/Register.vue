@@ -57,7 +57,7 @@
             placeholder="密碼"
             :rules="[{ required: true, message: '請輸入您的密碼' }]"
         />
-        <van-field
+        <!-- <van-field
             center
             clearable
             label="短信驗證碼"
@@ -69,7 +69,7 @@
           <template #button>
             <van-button  @click="sendSMS" size="small" type="primary" id="verifyBtn">發送驗證碼</van-button>
           </template>
-        </van-field>
+        </van-field> -->
         <div id="flux" class="form-group">
           <h3 style="margin-bottom:0;">King's私隱政策</h3>
           <p class="content" style="font-size:16px;line-height: 1.5rem;margin-top:10px;">
@@ -195,7 +195,7 @@ export default {
       confirm_password: '',
       phone: '',
       email:'',
-      code:'',
+      // code:'',
       surname:'',
     });
     var available=true;
@@ -238,7 +238,7 @@ export default {
         email: state.email,
         phone: '852'+state.phone,
         password: md5(state.password),
-        code: state.code,
+        // code: state.code,
       }
       // console.log(data);
       const headers = {
